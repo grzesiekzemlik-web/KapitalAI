@@ -336,7 +336,8 @@ biggest+"<br>"+
 
 max+" zł";
 
-
+updateChart();
+  
 }
 
 
@@ -352,5 +353,5 @@ updateDashboard();
 
 showHistory();
 
-updateChart();
+
 }
