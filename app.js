@@ -276,16 +276,12 @@ updateDashboard();
 
 function updateAnalysis(){
 
-
 let total=0;
-
 
 let categories={};
 
 
-
 expenses.forEach(e=>{
-
 
 total+=e.amount;
 
@@ -296,13 +292,9 @@ categories[e.category]=0;
 
 }
 
-
 categories[e.category]+=e.amount;
 
-
-
 });
-
 
 
 let biggest="Brak";
@@ -310,9 +302,7 @@ let biggest="Brak";
 let max=0;
 
 
-
 for(let c in categories){
-
 
 if(categories[c]>max){
 
@@ -325,19 +315,16 @@ biggest=c;
 }
 
 
-
 document.getElementById("analysisText").innerHTML =
 
 "💸 Wydatki: "+total+" zł<br><br>"+
-
 "🔥 Największa kategoria: "+
-
 biggest+"<br>"+
-
 max+" zł";
 
+
 updateChart();
-  
+
 }
 
 
