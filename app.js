@@ -1,50 +1,44 @@
-// Kapitał AI - główna logika
-
+// Kapitał AI - główna aplikacja
 
 let money = loadMoney();
-
 let expenses = loadExpenses();
-
 let goal = loadGoal();
-
-
-
 
 
 function showPage(page){
 
-
 document.querySelectorAll(".page").forEach(p=>{
-
 p.classList.remove("active");
-
 });
 
 
-document.getElementById(page)
-.classList.add("active");
+let selected = document.getElementById(page);
+
+if(selected){
+selected.classList.add("active");
+}
 
 
+refreshApp();
 
-if(page==="analysis"){
-
-updateAnalysis();
-
-showHistory();
 
 }
 
 
-if(page==="ai"){
+
+function refreshApp(){
+
+updateDashboard();
+
+showHistory();
+
+updateAnalysis();
+
+updateChart();
 
 updateAI();
 
 }
-
-
-}
-
-
 
 
 
@@ -60,51 +54,53 @@ money + " zł";
 
 let total = 0;
 
-let categories = {};
-
-
 
 expenses.forEach(e=>{
-
-
-total += e.amount;
-
-
-
-if(!categories[e.category]){
-
-categories[e.category]=0;
-
-}
-
-
-categories[e.category]+=e.amount;
-
-
-
+total += Number(e.amount);
 });
 
 
 
 document.getElementById("summary").innerHTML =
 
-"💸 Wydatki: "+total+" zł";
+"💸 Wszystkie wydatki: "+
+total+
+" zł";
 
 
 
-let limit = Math.floor((money*0.2)/30);
+let limit = 0;
 
+
+if(money > 0){
+
+limit = Math.floor((money*0.2)/30);
+
+}
 
 
 document.getElementById("dailyLimit").innerHTML =
 
-"💳 Limit dzienny: "+limit+" zł";
+"💳 Limit dzienny: "+
+limit+
+" zł";
 
 
 
 
 
-if(goal){
+if(goal && goal.value > 0){
+
+
+let progress =
+Math.floor((money / goal.value)*100);
+
+
+
+if(progress > 100){
+progress = 100;
+}
+
 
 
 document.getElementById("goalInfo").innerHTML =
@@ -114,7 +110,9 @@ goal.name+
 money+
 " / "+
 goal.value+
-" zł";
+" zł<br>"+
+progress+
+"%";
 
 
 }else{
@@ -126,9 +124,12 @@ document.getElementById("goalInfo").innerHTML =
 
 }
 
-updateAI();
 
 }
+
+
+
+
 
 
 
@@ -148,7 +149,7 @@ document.getElementById("category").value;
 
 
 
-if(!name || !amount){
+if(!name || amount <= 0){
 
 return;
 
@@ -174,20 +175,19 @@ money -= amount;
 
 
 
-saveExpenses(expenses);
-
 saveMoney(money);
 
+saveExpenses(expenses);
 
-
-updateDashboard();
-
-showHistory();
 
 
 document.getElementById("expenseName").value="";
 
 document.getElementById("expenseAmount").value="";
+
+
+
+refreshApp();
 
 
 }
@@ -201,7 +201,15 @@ document.getElementById("expenseAmount").value="";
 function showHistory(){
 
 
-let box=document.getElementById("history");
+let box =
+document.getElementById("history");
+
+
+
+if(!box){
+return;
+}
+
 
 
 if(expenses.length===0){
@@ -214,19 +222,13 @@ return;
 
 
 
-box.innerHTML =
-expenses.map(e=>`
+box.innerHTML = expenses.map(e=>`
 
 <p>
-
 <b>${e.name}</b><br>
-
 ${e.category}<br>
-
 -${e.amount} zł<br>
-
 ${e.date}
-
 </p>
 
 <hr>
@@ -246,15 +248,28 @@ ${e.date}
 function saveGoal(){
 
 
+let name =
+document.getElementById("goalName").value;
+
+
+let value =
+Number(document.getElementById("goalValue").value);
+
+
+
+if(!name || value<=0){
+
+return;
+
+}
+
+
+
 goal={
 
-name:
-document.getElementById("goalName").value,
+name:name,
 
-
-value:
-Number(document.getElementById("goalValue").value)
-
+value:value
 
 };
 
@@ -263,12 +278,10 @@ Number(document.getElementById("goalValue").value)
 saveGoalData(goal);
 
 
-
-updateDashboard();
+refreshApp();
 
 
 }
-
 
 
 
@@ -277,16 +290,33 @@ updateDashboard();
 
 
 function updateAnalysis(){
-console.log(expenses);
+
+
+let box =
+document.getElementById("analysisText");
+
+
+
+if(!box){
+return;
+}
+
+
 
 let total=0;
 
 let categories={};
 
 
+
 expenses.forEach(e=>{
 
-total+=e.amount;
+
+let amount = Number(e.amount);
+
+
+total+=amount;
+
 
 
 if(!categories[e.category]){
@@ -295,14 +325,21 @@ categories[e.category]=0;
 
 }
 
-categories[e.category]+=e.amount;
+
+
+categories[e.category]+=amount;
+
+
 
 });
+
+
 
 
 let biggest="Brak";
 
 let max=0;
+
 
 
 for(let c in categories){
@@ -318,16 +355,32 @@ biggest=c;
 }
 
 
-let box = document.getElementById("analysisText");
 
-if(box){
+if(expenses.length===0){
 
-box.innerHTML =
 
-"💸 Wydatki: "+total+" zł<br><br>"+
-"🔥 Największa kategoria: "+
-biggest+"<br>"+
-max+" zł";
+box.innerHTML="Brak danych";
+
+
+return;
+
+
+}
+
+
+
+box.innerHTML=
+
+"💸 Wydatki: "+
+total+
+" zł<br><br>"+
+
+"🔥 Największa kategoria:<br>"+
+biggest+
+"<br>"+
+max+
+" zł";
+
 
 }
 
@@ -339,10 +392,6 @@ max+" zł";
 
 window.onload=function(){
 
-
-updateDashboard();
-
-showHistory();
-
+refreshApp();
 
 }
