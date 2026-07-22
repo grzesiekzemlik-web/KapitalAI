@@ -226,6 +226,15 @@ Brak wydatków
 </div>
 
 </div>
+<div id="analysis" class="card" style="display:none">
+
+<h2>📊 Analiza</h2>
+
+<p id="analysisText">
+Brak danych
+</p>
+
+</div>
 <div id="ai" class="card" style="display:none">
 
 <h2>🤖 AI Doradca</h2>
@@ -352,6 +361,7 @@ JSON.stringify(expenses);
 update();
 showHistory();
 updateExpenses();
+updateAnalysis();
 }
 
 
@@ -457,6 +467,51 @@ total += e.amount;
 document.getElementById("expenseTotal").innerHTML =
 "Wydano: "+total+" zł";
 
+
+}
+function updateAnalysis(){
+
+let total = 0;
+
+let categories = {};
+
+
+expenses.forEach(e=>{
+
+total += e.amount;
+
+
+if(!categories[e.category]){
+categories[e.category]=0;
+}
+
+categories[e.category]+=e.amount;
+
+});
+
+
+let biggest = "Brak";
+
+let max = 0;
+
+
+for(let c in categories){
+
+if(categories[c]>max){
+
+max=categories[c];
+biggest=c;
+
+}
+
+}
+
+
+document.getElementById("analysisText").innerHTML =
+
+"💸 Wydatki: "+total+" zł<br><br>"+
+"Największa kategoria:<br>"+
+"🔥 "+biggest+" - "+max+" zł";
 
 }
 </script>
