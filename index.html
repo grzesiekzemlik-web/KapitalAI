@@ -111,6 +111,9 @@ input {
 <div class="balance" id="money">
 0 zł
 </div>
+ <p id="dailyLimit">
+Dzisiejszy limit: brak danych
+</p>   
 </div>
 
 
@@ -362,6 +365,25 @@ document.getElementById(tab).style.display="block";
 }
 
 }
+  function calculateLimit(){
+
+let days = 30;
+
+let safeMoney = money * 0.2;
+
+let limit = Math.floor(safeMoney/days);
+
+
+if(limit > 0){
+
+document.getElementById("dailyLimit").innerHTML =
+"💳 Dzisiejszy limit: "+limit+" zł";
+
+}
+
+}
+
+calculateLimit();  
 </script>
 <div class="menu">
 
