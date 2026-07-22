@@ -437,8 +437,11 @@ showHistory();
 update();
 function showTab(tab){
 
-document.querySelectorAll(".card")
-.forEach(x=>x.style.display="none");
+let cards = document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+card.style.display="none";
+});
 
 
 if(tab=="home"){
@@ -446,6 +449,45 @@ if(tab=="home"){
 document.getElementById("dashboard").style.display="block";
 
 updateDashboard();
+
+}
+
+
+if(tab=="expenses"){
+
+document.getElementById("expenses").style.display="block";
+
+}
+
+
+if(tab=="analysis"){
+
+document.getElementById("analysis").style.display="block";
+
+updateAnalysis();
+
+}
+
+
+if(tab=="goals"){
+
+document.getElementById("goals").style.display="block";
+
+}
+
+
+if(tab=="ai"){
+
+document.getElementById("ai").style.display="block";
+
+}
+
+
+if(tab=="settings"){
+
+document.getElementById("settings").style.display="block";
+
+}
 
 }
 
