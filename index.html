@@ -127,14 +127,52 @@ Policz budżet
 Brak danych
 </p>
 
-</div>  
-<p>Twoje oszczędności</p>
+<div id="dashboard" class="card">
+
+<h2>💰 Kapitał AI</h2>
+
+<p>Twój majątek</p>
+
 <div class="balance" id="money">
 0 zł
 </div>
- <p id="dailyLimit">
-Dzisiejszy limit: brak danych
-</p>   
+
+
+<p id="dailyLimit">
+💳 Dzisiejszy limit: brak danych
+</p>
+
+
+<hr>
+
+
+<h3>🎯 Cel</h3>
+
+<p id="dashboardGoal">
+Brak ustawionego celu
+</p>
+
+
+<hr>
+
+
+<h3>📊 Ten miesiąc</h3>
+
+<p id="dashboardExpenses">
+Brak danych o wydatkach
+</p>
+
+
+<hr>
+
+
+<h3>🤖 Rada AI</h3>
+
+<p id="aiAdvice">
+Analizuję Twoje finanse...
+</p>
+
+
 </div>
 
 
@@ -404,6 +442,34 @@ document.querySelectorAll(".card")
 
 
 if(tab=="home"){
+
+document.getElementById("dashboard").style.display="block";
+
+updateDashboard();
+
+}
+
+
+if(document.getElementById(tab)){
+
+document.getElementById(tab).style.display="block";
+
+}
+
+
+if(tab=="analysis"){
+
+updateAnalysis();
+
+}
+
+}
+
+document.querySelectorAll(".card")
+.forEach(x=>x.style.display="none");
+
+
+if(tab=="home"){
 document.getElementById("money").parentElement.style.display="block";
 }
 
@@ -514,6 +580,37 @@ document.getElementById("analysisText").innerHTML =
 "💸 Wydatki: "+total+" zł<br><br>"+
 "Największa kategoria:<br>"+
 "🔥 "+biggest+" - "+max+" zł";
+
+}
+function updateDashboard(){
+
+let total = 0;
+
+
+expenses.forEach(e=>{
+
+total += e.amount;
+
+});
+
+
+document.getElementById("dashboardExpenses").innerHTML =
+"💸 Wydatki: "+total+" zł";
+
+
+if(expenses.length > 0){
+
+document.getElementById("aiAdvice").innerHTML =
+"🤖 Najpierw kontroluj największe wydatki. Masz już zapisane "+expenses.length+" transakcje.";
+
+}
+else{
+
+document.getElementById("aiAdvice").innerHTML =
+"🤖 Dodawaj wydatki, a AI zacznie analizować Twoje nawyki.";
+
+}
+
 
 }
 </script>
