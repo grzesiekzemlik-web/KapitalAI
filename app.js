@@ -179,7 +179,7 @@ saveMoney(money);
 
 
 updateDashboard();
-
+updateAI();
 showHistory();
 
 
