@@ -107,6 +107,27 @@ input {
 <h1>💰 Kapitał AI</h1>
 
 <div class="card">
+  <div class="card">
+
+<h2>📅 Mój budżet</h2>
+
+<input id="salary" placeholder="Wypłata" type="number">
+
+<input id="saveMoney" placeholder="Ile odkładam" type="number">
+
+<input id="daysLeft" placeholder="Dni do wypłaty" type="number">
+
+
+<button class="primary" onclick="calculateBudget()">
+Policz budżet
+</button>
+
+
+<p id="budgetResult">
+Brak danych
+</p>
+
+</div>  
 <p>Twoje oszczędności</p>
 <div class="balance" id="money">
 0 zł
@@ -384,6 +405,29 @@ document.getElementById("dailyLimit").innerHTML =
 }
 
 calculateLimit();  
+ function calculateBudget(){
+
+let salary =
+Number(document.getElementById("salary").value);
+
+let save =
+Number(document.getElementById("saveMoney").value);
+
+let days =
+Number(document.getElementById("daysLeft").value);
+
+
+let available = salary-save;
+
+let daily = Math.floor(available/days);
+
+
+document.getElementById("budgetResult").innerHTML =
+"💰 Do wydania: "+available+" zł<br><br>"+
+"💳 Limit dzienny: "+daily+" zł";
+
+
+} 
 </script>
 <div class="menu">
 
