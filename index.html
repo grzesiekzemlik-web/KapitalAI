@@ -906,7 +906,6 @@ updateAll();
 function showPage(page){
 
 
-
 document.querySelectorAll(".page").forEach(p=>{
 
 p.classList.remove("active");
@@ -914,9 +913,14 @@ p.classList.remove("active");
 });
 
 
-
 document.getElementById(page).classList.add("active");
 
+
+if(page=="analysis"){
+
+updateAnalysis();
+
+}
 
 
 }
@@ -926,5 +930,69 @@ document.getElementById(page).classList.add("active");
 
 updateAll();
 
+function updateAnalysis(){
 
+let total = 0;
+
+let categories = {};
+
+
+expenses.forEach(e=>{
+
+total += e.amount;
+
+
+if(!categories[e.category]){
+
+categories[e.category]=0;
+
+}
+
+
+categories[e.category]+=e.amount;
+
+
+});
+
+
+let biggest="Brak";
+
+let max=0;
+
+
+for(let c in categories){
+
+if(categories[c]>max){
+
+max=categories[c];
+
+biggest=c;
+
+}
+
+}
+
+
+
+if(expenses.length===0){
+
+document.getElementById("analysisText").innerHTML =
+"Brak wydatków do analizy";
+
+return;
+
+}
+
+
+
+document.getElementById("analysisText").innerHTML =
+
+"💸 Wszystkie wydatki: "+total+" zł<br><br>"+
+
+"🔥 Największa kategoria:<br>"+
+
+biggest+" - "+max+" zł";
+
+
+}
 </script>
