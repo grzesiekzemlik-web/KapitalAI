@@ -29,7 +29,6 @@ document.getElementById(page)
 if(page==="analysis"){
 
 updateAnalysis();
-updateChart();
 
 }
 
