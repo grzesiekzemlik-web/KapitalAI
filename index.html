@@ -7,7 +7,34 @@
 <title>Kapitał AI</title>
 
 <style>
+.menu {
 
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+
+height:70px;
+
+background:#18181b;
+
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+border-radius:25px 25px 0 0;
+
+}
+
+
+.menu button {
+
+background:none;
+color:white;
+font-size:25px;
+width:auto;
+
+}
 body {
     background:#09090b;
     color:white;
@@ -158,7 +185,37 @@ Brak wydatków
 
 </div>
 
+<div id="ai" class="card" style="display:none">
 
+<h2>🤖 AI Doradca</h2>
+
+<p>
+Tutaj Kapitał AI będzie analizował Twoje wydatki i pomagał oszczędzać.
+</p>
+
+</div>
+
+
+<div id="goals" class="card" style="display:none">
+
+<h2>🎯 Twoje cele</h2>
+
+<p>
+Twórz cele i obserwuj postęp.
+</p>
+
+</div>
+
+
+<div id="settings" class="card" style="display:none">
+
+<h2>⚙️ Ustawienia</h2>
+
+<p>
+Konto użytkownika i synchronizacja danych.
+</p>
+
+</div>
 <script>
 
 let money = Number(localStorage.money || 0);
@@ -291,6 +348,28 @@ showHistory();
 update();
 
 </script>
+<div class="menu">
 
+<button onclick="showTab('home')">
+🏠
+</button>
+
+<button onclick="showTab('expenses')">
+💸
+</button>
+
+<button onclick="showTab('goals')">
+🎯
+</button>
+
+<button onclick="showTab('ai')">
+🤖
+</button>
+
+<button onclick="showTab('settings')">
+⚙️
+</button>
+
+</div>
 </body>
 </html>
