@@ -107,7 +107,41 @@ Ustaw cel
 
 </div>
 
+<div class="card">
 
+<h2>💸 Dodaj wydatek</h2>
+
+<input id="expenseName" placeholder="np. paliwo">
+
+<input id="expenseAmount" placeholder="Kwota" type="number">
+
+<select id="category">
+<option>Paliwo</option>
+<option>Jedzenie</option>
+<option>Auto</option>
+<option>Zakupy</option>
+<option>Rozrywka</option>
+<option>Rachunki</option>
+<option>Inne</option>
+</select>
+
+<button class="primary" onclick="addExpense()">
+Dodaj wydatek
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Historia</h2>
+
+<div id="history">
+Brak wydatków
+</div>
+
+</div>
+    
 <div class="card">
 
 <h2>Dodaj pieniądze</h2>
@@ -187,7 +221,73 @@ update();
 
 }
 
+let expenses = JSON.parse(localStorage.expenses || "[]");
 
+
+function addExpense(){
+
+let name =
+document.getElementById("expenseName").value;
+
+let amount =
+Number(document.getElementById("expenseAmount").value);
+
+let category =
+document.getElementById("category").value;
+
+
+expenses.push({
+name:name,
+amount:amount,
+category:category,
+date:new Date().toLocaleDateString()
+});
+
+
+money -= amount;
+
+
+localStorage.expenses =
+JSON.stringify(expenses);
+
+
+update();
+showHistory();
+
+}
+
+
+
+function showHistory(){
+
+let box =
+document.getElementById("history");
+
+
+if(expenses.length===0){
+box.innerHTML="Brak wydatków";
+return;
+}
+
+
+box.innerHTML =
+expenses.map(e=>`
+
+<p>
+<b>${e.name}</b><br>
+${e.category}
+<br>
+-${e.amount} zł
+<br>
+${e.date}
+</p>
+
+`).join("");
+
+}
+
+
+showHistory();
 update();
 
 </script>
