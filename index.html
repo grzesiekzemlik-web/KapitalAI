@@ -1,227 +1,17 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Kapitał AI</title>
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-*{
-box-sizing:border-box;
-}
-
-body{
-
-background:#09090b;
-color:white;
-
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-
-margin:0;
-padding:20px;
-
-padding-bottom:90px;
-
-}
-
-
-h1{
-
-font-size:32px;
-
-}
-
-
-h2{
-
-margin-top:0;
-
-}
-
-
-.card{
-
-background:#18181b;
-
-border-radius:22px;
-
-padding:20px;
-
-margin-bottom:18px;
-
-}
-
-
-.balance{
-
-font-size:44px;
-
-font-weight:700;
-
-margin:10px 0;
-
-}
-
-
-.small{
-
-color:#a1a1aa;
-
-}
-
-
-button{
-
-width:100%;
-
-padding:15px;
-
-border-radius:15px;
-
-border:none;
-
-margin-top:10px;
-
-font-size:17px;
-
-font-weight:600;
-
-}
-
-
-.primary{
-
-background:white;
-
-color:black;
-
-}
-
-
-input,select{
-
-width:100%;
-
-padding:14px;
-
-margin-top:10px;
-
-border-radius:12px;
-
-border:none;
-
-background:#27272a;
-
-color:white;
-
-font-size:16px;
-
-}
-
-
-.progress{
-
-height:12px;
-
-background:#27272a;
-
-border-radius:20px;
-
-overflow:hidden;
-
-margin-top:15px;
-
-}
-
-
-.progress div{
-
-height:100%;
-
-width:0%;
-
-background:white;
-
-}
-
-
-
-hr{
-
-border:none;
-
-border-top:1px solid #27272a;
-
-margin:20px 0;
-
-}
-
-
-
-/* MENU */
-
-.menu{
-
-position:fixed;
-
-bottom:0;
-
-left:0;
-
-right:0;
-
-height:75px;
-
-background:#18181b;
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-border-radius:25px 25px 0 0;
-
-}
-
-
-.menu button{
-
-background:none;
-
-color:white;
-
-font-size:25px;
-
-width:auto;
-
-padding:5px;
-
-margin:0;
-
-}
-
-
-/* UKRYTE EKRANY */
-
-.page{
-
-display:none;
-
-}
-
-
-.active{
-
-display:block;
-
-}
-
-
-</style>
+<link rel="manifest" href="manifest.json">
 
 </head>
 
@@ -229,32 +19,31 @@ display:block;
 <body>
 
 
+<header>
+
 <h1>💰 Kapitał AI</h1>
 
+</header>
 
 
-<!-- START -->
 
-<div id="home" class="page active">
+<main>
+
+
+<section id="home" class="page active">
 
 
 <div class="card">
 
-
 <h2>Twój majątek</h2>
 
-
-<div class="balance" id="money">
-
+<div id="money" class="balance">
 0 zł
-
 </div>
 
 
 <p id="dailyLimit">
-
-💳 Dzisiejszy limit: brak
-
+💳 Limit dzienny: -
 </p>
 
 
@@ -264,23 +53,11 @@ display:block;
 
 <div class="card">
 
+<h2>🎯 Cel</h2>
 
-<h2>🎯 Najbliższy cel</h2>
-
-
-<p id="homeGoal">
-
+<p id="goalInfo">
 Brak celu
-
 </p>
-
-
-<div class="progress">
-
-<div id="goalBar"></div>
-
-</div>
-
 
 </div>
 
@@ -288,23 +65,11 @@ Brak celu
 
 <div class="card">
 
+<h2>📊 Analiza</h2>
 
-<h2>📊 Ten miesiąc</h2>
-
-
-<p id="homeExpenses">
-
-Wydatki: 0 zł
-
+<p id="summary">
+Brak danych
 </p>
-
-
-<p id="homeCategory">
-
-Największa kategoria: brak
-
-</p>
-
 
 </div>
 
@@ -312,39 +77,31 @@ Największa kategoria: brak
 
 <div class="card">
 
-
-<h2>🤖 Rada AI</h2>
-
+<h2>🤖 AI Doradca</h2>
 
 <p id="aiAdvice">
-
-Dodawaj wydatki, a AI zacznie analizować Twoje finanse.
-
+Czekam na dane...
 </p>
 
-
 </div>
 
 
-</div>
-<!-- WYDATKI -->
 
-<div id="expenses" class="page">
+</section>
+
+
+
+
+
+<section id="expenses" class="page">
 
 
 <div class="card">
 
-<h2>💸 Wydatki</h2>
+<h2>💸 Dodaj wydatek</h2>
 
 
-<p id="expenseTotal">
-
-Wydano: 0 zł
-
-</p>
-
-
-<input id="expenseName" placeholder="Nazwa wydatku">
+<input id="expenseName" placeholder="Nazwa">
 
 
 <input id="expenseAmount" type="number" placeholder="Kwota">
@@ -362,16 +119,14 @@ Wydano: 0 zł
 
 <option>Rachunki</option>
 
-<option>Rozrywka</option>
-
 <option>Inne</option>
 
 </select>
 
 
-<button class="primary" onclick="addExpense()">
+<button onclick="addExpense()">
 
-Dodaj wydatek
+Dodaj
 
 </button>
 
@@ -379,12 +134,9 @@ Dodaj wydatek
 </div>
 
 
-
 <div class="card">
 
-
-<h2>📋 Historia</h2>
-
+<h2>Historia</h2>
 
 <div id="history">
 
@@ -396,65 +148,51 @@ Brak wydatków
 </div>
 
 
-</div>
+</section>
 
 
 
 
 
-<!-- CELE -->
 
-
-<div id="goals" class="page">
+<section id="goals" class="page">
 
 
 <div class="card">
 
-
-<h2>🎯 Cele oszczędnościowe</h2>
-
-
-<input id="goalName" placeholder="np. iPhone 17">
+<h2>🎯 Cele</h2>
 
 
-<input id="goalValue" type="number" placeholder="Kwota celu">
+<input id="goalName" placeholder="Nazwa celu">
 
 
-<button class="primary" onclick="saveGoal()">
+<input id="goalValue" type="number" placeholder="Kwota">
 
-Ustaw cel
+
+<button onclick="saveGoal()">
+
+Zapisz cel
 
 </button>
 
 
-<p id="goalText">
-
-Brak celu
-
-</p>
-
-
 </div>
 
 
-</div>
+</section>
 
 
 
 
 
 
-<!-- ANALIZA -->
 
-
-<div id="analysis" class="page">
+<section id="analysis" class="page">
 
 
 <div class="card">
 
-
 <h2>📊 Analiza</h2>
-
 
 <p id="analysisText">
 
@@ -466,7 +204,7 @@ Brak danych
 </div>
 
 
-</div>
+</section>
 
 
 
@@ -474,21 +212,17 @@ Brak danych
 
 
 
-<!-- AI -->
-
-
-<div id="ai" class="page">
+<section id="ai" class="page">
 
 
 <div class="card">
-
 
 <h2>🤖 AI Doradca</h2>
 
 
 <p id="aiFull">
 
-Analizuję Twoje finanse...
+Czekam na analizę...
 
 </p>
 
@@ -496,510 +230,61 @@ Analizuję Twoje finanse...
 </div>
 
 
-</div>
+</section>
 
 
 
 
 
-
-
-
-<!-- USTAWIENIA -->
-
-
-<div id="settings" class="page">
-
-
-<div class="card">
-
-
-<h2>⚙️ Ustawienia</h2>
-
-
-<p>
-
-Kapitał AI v1.0
-
-</p>
-
-
-<p class="small">
-
-Twoje dane są zapisane lokalnie na urządzeniu.
-
-</p>
-
-
-</div>
-
-
-</div>
+</main>
 
 
 
 
 
-
-<!-- MENU -->
-
-
-<div class="menu">
+<nav class="menu">
 
 
 <button onclick="showPage('home')">
-
 🏠
-
 </button>
 
 
 <button onclick="showPage('expenses')">
-
 💸
-
 </button>
 
 
 <button onclick="showPage('analysis')">
-
 📊
-
 </button>
 
 
 <button onclick="showPage('goals')">
-
 🎯
-
 </button>
 
 
 <button onclick="showPage('ai')">
-
 🤖
-
 </button>
 
 
-<button onclick="showPage('settings')">
+</nav>
 
-⚙️
 
-</button>
 
 
-</div>
-<script>
-let money = Number(localStorage.money || 0);
 
-let expenses = JSON.parse(localStorage.expenses || "[]");
+<script src="storage.js"></script>
 
-let goal = JSON.parse(localStorage.goal || "{}");
+<script src="ai.js"></script>
 
+<script src="charts.js"></script>
 
+<script src="app.js"></script>
 
-function saveData(){
 
-localStorage.money = money;
+</body>
 
-localStorage.expenses = JSON.stringify(expenses);
-
-localStorage.goal = JSON.stringify(goal);
-
-}
-
-
-
-
-
-function updateAll(){
-
-
-document.getElementById("money").innerHTML =
-money+" zł";
-
-
-
-let total = 0;
-
-let categories = {};
-
-
-
-expenses.forEach(e=>{
-
-total += e.amount;
-
-
-if(!categories[e.category]){
-
-categories[e.category]=0;
-
-}
-
-categories[e.category]+=e.amount;
-
-
-});
-
-
-
-document.getElementById("expenseTotal").innerHTML =
-"Wydano: "+total+" zł";
-
-
-
-document.getElementById("homeExpenses").innerHTML =
-"💸 Wydatki: "+total+" zł";
-
-
-
-let biggest="brak";
-
-let max=0;
-
-
-for(let c in categories){
-
-if(categories[c]>max){
-
-max=categories[c];
-
-biggest=c;
-
-}
-
-}
-
-
-
-document.getElementById("homeCategory").innerHTML =
-"🔥 Najwięcej: "+biggest+" ("+max+" zł)";
-
-
-
-if(goal.name){
-
-
-let percent=Math.min((money/goal.value)*100,100);
-
-
-document.getElementById("homeGoal").innerHTML=
-
-goal.name+"<br>"+money+" / "+goal.value+" zł";
-
-
-document.getElementById("goalBar").style.width=
-
-percent+"%";
-
-
-document.getElementById("goalText").innerHTML=
-
-"Cel: "+goal.name;
-
-
-}else{
-
-
-document.getElementById("homeGoal").innerHTML=
-"Brak celu";
-
-
-}
-
-
-
-
-let limit=Math.floor((money*0.2)/30);
-
-
-
-if(limit>0){
-
-document.getElementById("dailyLimit").innerHTML=
-
-"💳 Dzisiejszy limit: "+limit+" zł";
-
-}
-
-
-
-
-
-let advice = "";
-
-if(expenses.length===0){
-
-advice = "👋 Witaj! Dodaj pierwsze wydatki, a AI zacznie analizować Twoje finanse.";
-
-}else if(total > money){
-
-advice = "⚠️ Wydatki są bardzo wysokie względem Twoich środków. Ogranicz zakupy w najbliższych dniach.";
-
-}else if(max > total*0.5){
-
-advice = "💡 Ponad połowa wydatków pochodzi z kategorii '"+biggest+"'. To tutaj możesz najwięcej zaoszczędzić.";
-
-}else{
-
-advice = "✅ Dobrze zarządzasz pieniędzmi. Kontynuuj odkładanie na swój cel.";
-
-}
-
-document.getElementById("aiAdvice").innerHTML = advice;
-document.getElementById("aiFull").innerHTML = advice;
-
-
-
-
-showHistory();
-
-saveData();
-
-
-}
-
-
-
-
-
-function addMoney(){
-
-
-let value=Number(document.getElementById("amount").value);
-
-
-money+=value;
-
-
-updateAll();
-
-
-}
-
-
-
-
-
-function removeMoney(){
-
-
-let value=Number(document.getElementById("amount").value);
-
-
-money-=value;
-
-
-updateAll();
-
-
-}
-
-
-
-
-
-function addExpense(){
-
-
-let name=document.getElementById("expenseName").value;
-
-
-let amount=Number(document.getElementById("expenseAmount").value);
-
-
-let category=document.getElementById("category").value;
-
-
-
-expenses.push({
-
-name:name,
-
-amount:amount,
-
-category:category,
-
-date:new Date().toLocaleDateString()
-
-});
-
-
-
-money-=amount;
-
-
-
-updateAll();
-
-
-}
-
-
-
-
-
-
-
-function showHistory(){
-
-
-let box=document.getElementById("history");
-
-
-if(expenses.length===0){
-
-box.innerHTML="Brak wydatków";
-
-return;
-
-}
-
-
-
-box.innerHTML=expenses.map(e=>`
-
-<p>
-
-<b>${e.name}</b><br>
-
-${e.category}<br>
-
--${e.amount} zł<br>
-
-${e.date}
-
-</p>
-
-<hr>
-
-`).join("");
-
-
-
-}
-
-
-
-
-
-
-
-function saveGoal(){
-
-
-goal={
-
-name:document.getElementById("goalName").value,
-
-value:Number(document.getElementById("goalValue").value)
-
-};
-
-
-updateAll();
-
-
-}
-
-
-
-
-
-
-
-function showPage(page){
-
-
-document.querySelectorAll(".page").forEach(p=>{
-
-p.classList.remove("active");
-
-});
-
-
-document.getElementById(page).classList.add("active");
-
-
-if(page=="analysis"){
-
-updateAnalysis();
-
-}
-
-
-}
-
-
-
-
-updateAll();
-
-function updateAnalysis(){
-
-let total = 0;
-
-let categories = {};
-
-
-expenses.forEach(e=>{
-
-total += e.amount;
-
-
-if(!categories[e.category]){
-
-categories[e.category]=0;
-
-}
-
-
-categories[e.category]+=e.amount;
-
-
-});
-
-
-let biggest="Brak";
-
-let max=0;
-
-
-for(let c in categories){
-
-if(categories[c]>max){
-
-max=categories[c];
-
-biggest=c;
-
-}
-
-}
-
-
-
-if(expenses.length===0){
-
-document.getElementById("analysisText").innerHTML =
-"Brak wydatków do analizy";
-
-return;
-
-}
-
-
-
-document.getElementById("analysisText").innerHTML =
-
-"💸 Wszystkie wydatki: "+total+" zł<br><br>"+
-
-"🔥 Największa kategoria:<br>"+
-
-biggest+" - "+max+" zł";
-
-
-}
-</script>
+</html>
