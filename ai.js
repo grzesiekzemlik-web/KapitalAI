@@ -3,6 +3,12 @@
 
 function updateAI(){
 
+let money = window.money;
+
+let expenses = window.expenses;
+
+let goal = window.goal;
+
 
 let total = 0;
 
