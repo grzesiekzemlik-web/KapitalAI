@@ -346,7 +346,22 @@ ${e.date}
 
 showHistory();
 update();
+function showTab(tab){
 
+document.querySelectorAll(".card")
+.forEach(x=>x.style.display="none");
+
+
+if(tab=="home"){
+document.getElementById("money").parentElement.style.display="block";
+}
+
+
+if(document.getElementById(tab)){
+document.getElementById(tab).style.display="block";
+}
+
+}
 </script>
 <div class="menu">
 
