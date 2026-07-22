@@ -276,7 +276,6 @@ updateDashboard();
 
 function updateAnalysis(){
 
-expenses = loadExpenses();
 
 let total=0;
 
