@@ -1,11 +1,11 @@
 // Kapitał AI - główna logika
 
 
-let money = loadMoney();
+window.money = loadMoney();
 
-let expenses = loadExpenses();
+window.expenses = loadExpenses();
 
-let goal = loadGoal();
+window.goal = loadGoal();
 
 
 
