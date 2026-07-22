@@ -208,7 +208,24 @@ Brak wydatków
 </button>
 
 </div>
+<div id="expenses" class="card" style="display:none">
 
+<h2>💸 Wydatki</h2>
+
+<p>
+Kontrola Twoich wydatków
+</p>
+
+<p id="expenseTotal">
+Wydano: 0 zł
+</p>
+
+
+<div id="expenseList">
+Brak wydatków
+</div>
+
+</div>
 <div id="ai" class="card" style="display:none">
 
 <h2>🤖 AI Doradca</h2>
@@ -428,6 +445,20 @@ document.getElementById("budgetResult").innerHTML =
 
 
 } 
+function updateExpenses(){
+
+let total = 0;
+
+expenses.forEach(e=>{
+total += e.amount;
+});
+
+
+document.getElementById("expenseTotal").innerHTML =
+"Wydano: "+total+" zł";
+
+
+}
 </script>
 <div class="menu">
 
