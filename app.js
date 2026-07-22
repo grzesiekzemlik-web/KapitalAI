@@ -352,5 +352,5 @@ updateDashboard();
 
 showHistory();
 
-
+updateChart();
 }
