@@ -1,7 +1,8 @@
 // Kapitał AI - wykresy
 
 
-let chart;
+let expenseChart = null;
+
 
 
 
@@ -21,11 +22,16 @@ return;
 
 
 
+
 let categories = {};
 
 
 
 expenses.forEach(e=>{
+
+
+let amount = Number(e.amount);
+
 
 
 if(!categories[e.category]){
@@ -35,10 +41,13 @@ categories[e.category]=0;
 }
 
 
-categories[e.category]+=e.amount;
+
+categories[e.category]+=amount;
+
 
 
 });
+
 
 
 
@@ -52,15 +61,27 @@ Object.values(categories);
 
 
 
-if(chart){
 
-chart.destroy();
+if(expenseChart){
+
+expenseChart.destroy();
 
 }
 
 
 
-chart = new Chart(canvas, {
+
+
+if(labels.length===0){
+
+return;
+
+}
+
+
+
+
+expenseChart = new Chart(canvas, {
 
 
 type:"doughnut",
@@ -82,10 +103,34 @@ data:values
 },
 
 
+
 options:{
 
 
-responsive:true
+responsive:true,
+
+
+plugins:{
+
+
+legend:{
+
+
+position:"bottom",
+
+labels:{
+
+
+color:"white"
+
+
+}
+
+
+}
+
+
+}
 
 
 }
