@@ -318,15 +318,16 @@ biggest=c;
 }
 
 
-document.getElementById("analysisText").innerHTML =
+let box = document.getElementById("analysisText");
+
+if(box){
+
+box.innerHTML =
 
 "💸 Wydatki: "+total+" zł<br><br>"+
 "🔥 Największa kategoria: "+
 biggest+"<br>"+
 max+" zł";
-
-
-updateChart();
 
 }
 
