@@ -275,7 +275,7 @@ updateDashboard();
 
 
 function updateAnalysis(){
-
+console.log(expenses);
 
 let total=0;
 
