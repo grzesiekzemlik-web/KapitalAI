@@ -728,21 +728,28 @@ document.getElementById("dailyLimit").innerHTML=
 
 
 
-if(expenses.length>0){
+let advice = "";
 
-document.getElementById("aiAdvice").innerHTML=
+if(expenses.length===0){
 
-"🤖 Masz zapisane "+expenses.length+
-" wydatków. Najbardziej pilnuj kategorii: "+biggest;
+advice = "👋 Witaj! Dodaj pierwsze wydatki, a AI zacznie analizować Twoje finanse.";
 
+}else if(total > money){
 
-document.getElementById("aiFull").innerHTML=
+advice = "⚠️ Wydatki są bardzo wysokie względem Twoich środków. Ogranicz zakupy w najbliższych dniach.";
 
-"Na podstawie danych widzę, że największy wydatek to "+
-biggest+". Warto kontrolować tę kategorię.";
+}else if(max > total*0.5){
 
+advice = "💡 Ponad połowa wydatków pochodzi z kategorii '"+biggest+"'. To tutaj możesz najwięcej zaoszczędzić.";
+
+}else{
+
+advice = "✅ Dobrze zarządzasz pieniędzmi. Kontynuuj odkładanie na swój cel.";
 
 }
+
+document.getElementById("aiAdvice").innerHTML = advice;
+document.getElementById("aiFull").innerHTML = advice;
 
 
 
