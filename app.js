@@ -124,7 +124,7 @@ document.getElementById("goalInfo").innerHTML =
 
 }
 
-
+updateAI();
 
 }
 
@@ -179,7 +179,7 @@ saveMoney(money);
 
 
 updateDashboard();
-updateAI();
+
 showHistory();
 
 
