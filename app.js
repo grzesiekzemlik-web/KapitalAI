@@ -30,6 +30,8 @@ if(page==="analysis"){
 
 updateAnalysis();
 
+showHistory();
+
 }
 
 
