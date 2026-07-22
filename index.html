@@ -411,7 +411,9 @@ document.getElementById("money").parentElement.style.display="block";
 if(document.getElementById(tab)){
 document.getElementById(tab).style.display="block";
 }
-
+if(tab=="analysis"){
+updateAnalysis();
+}
 }
   function calculateLimit(){
 
